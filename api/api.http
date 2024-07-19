@@ -1,2 +1,6 @@
-
+### npm run start | npm run build | npm run dev
 GET  http://localhost:3333/
+
+###
+
+GET http://localhost:3333/users
