@@ -12,10 +12,10 @@ datasource db {
 
 model User {
   id                    String                  @id @default(uuid())
-  name                  String
-  email                 String
-  password              String
-  type                  String
+  name                  String?
+  email                 String?
+  password              String?
+  type                  String?
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @updatedAt
   AcademicOpportunities AcademicOpportunities[]
@@ -35,7 +35,7 @@ model AcademicOpportunities {
 
 model Candidate {
   id               String                @id @default(uuid())
-  opportunities_id AcademicOpportunities @relation(fields: [opportunitiesId], references: [id])
+  opportunities_id AcademicOpportunities? @relation(fields: [opportunitiesId], references: [id])
   opportunitiesId  String
   user             User                  @relation(fields: [userId], references: [id])
   userId           String

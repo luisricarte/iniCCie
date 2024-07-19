@@ -9,10 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUser = void 0;
+exports.deleteUser = exports.updateUser = exports.createUser = exports.getById = exports.getAllUser = void 0;
 const client_1 = require("@prisma/client");
 const userController = new client_1.PrismaClient().user;
-// get all users
 const getAllUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const allUsers = yield userController.findMany({
@@ -28,7 +27,67 @@ const getAllUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getAllUser = getAllUser;
-// get users by id
-// create user
-// update user
-// delete user
+const getById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.params.id;
+        const user = yield userController.findFirst({
+            where: {
+                id: userId
+            },
+            include: {
+                AcademicOpportunities: true,
+                Candidate: true,
+            }
+        });
+        res.status(200).json({ data: user });
+    }
+    catch (e) {
+        console.log(e);
+    }
+});
+exports.getById = getById;
+const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userData = req.body;
+        const user = yield userController.create({
+            data: userData,
+        });
+        res.status(201).json({ data: user });
+    }
+    catch (e) {
+        console.log(e);
+    }
+});
+exports.createUser = createUser;
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.params.id;
+        const userData = req.body;
+        const user = yield userController.update({
+            where: {
+                id: userId
+            },
+            data: userData
+        });
+        res.status(200).json({ data: user });
+    }
+    catch (e) {
+        console.log(e);
+    }
+});
+exports.updateUser = updateUser;
+const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.params.id;
+        const user = yield userController.delete({
+            where: {
+                id: userId
+            }
+        });
+        res.status(200).json({ data: {} });
+    }
+    catch (e) {
+        console.log(e);
+    }
+});
+exports.deleteUser = deleteUser;
