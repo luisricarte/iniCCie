@@ -6,12 +6,15 @@ const port = 3333;
 
 app.use(express.json());
 
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${port}`);
+});
+
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, world!');
 });
 
-app.use("/users", userRouter);
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+// User Routes
+app.use("/users", userRouter);
+app.use("/opportunities",)

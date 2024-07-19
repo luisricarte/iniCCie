@@ -11,11 +11,11 @@ datasource db {
 }
 
 model User {
-  id                    String                  @id @default(uuid())
-  name                  String?
-  email                 String?
-  password              String?
-  type                  String?
+  id                    Int                     @id @default(autoincrement())
+  name                  String
+  email                 String
+  password              String
+  type                  String
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @updatedAt
   AcademicOpportunities AcademicOpportunities[]
@@ -23,22 +23,22 @@ model User {
 }
 
 model AcademicOpportunities {
-  id           String      @id @default(uuid())
-  titulo       String
-  descricao    String
-  professor_id User        @relation(fields: [professorId], references: [id])
-  professorId  String
-  status       String
-  type         String
-  Candidate    Candidate[]
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  teacher_id  User        @relation(fields: [teacherId], references: [id])
+  teacherId   Int
+  status      String
+  type        String
+  Candidate   Candidate[]
 }
 
 model Candidate {
-  id               String                @id @default(uuid())
+  id               Int                    @id @default(autoincrement())
   opportunities_id AcademicOpportunities? @relation(fields: [opportunitiesId], references: [id])
-  opportunitiesId  String
-  user             User                  @relation(fields: [userId], references: [id])
-  userId           String
+  opportunitiesId  Int
+  user             User                   @relation(fields: [userId], references: [id])
+  userId           Int
   data_candidatura DateTime
 }
 
