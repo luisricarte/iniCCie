@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import userRouter from "./routes/user.router";
-import opportunitiesRouter from "./routes/opportunities.router";
+import userRouter from "./user.router";
+import opportunitiesRouter from "./opportunities.router";
 
 const app = express();
 const port = 3333;

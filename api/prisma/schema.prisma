@@ -39,7 +39,7 @@ model Candidate {
   opportunitiesId  Int
   user             User                   @relation(fields: [userId], references: [id])
   userId           Int
-  data_candidatura DateTime
+  data_candidatura DateTime @default(now())
 }
 
 // enum statusOpportunities {
